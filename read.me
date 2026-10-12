@@ -1,0 +1,60 @@
+# Notes API
+
+A simple REST API for creating and viewing notes, built with FastAPI.
+
+## Features
+
+- Get all notes
+- Create a new note
+- Get a note by ID
+- Returns `404` if a note is not found
+
+## Tech Stack
+
+- Python 3.10+
+- FastAPI
+- Pydantic
+
+## Installation
+
+```bash
+git clone [https://github.com/username/notes-api.git](https://github.com/username/notes-api.git)
+cd notes-api
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install fastapi uvicorn
+```
+
+## Running the App
+
+```bash
+uvicorn main:app --reload
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Interactive Swagger documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/notes` | Get all notes |
+| `POST` | `/notes` | Create a new note |
+| `GET` | `/notes/{note_id}` | Get a note by ID |
+
+## Example Request
+
+### Create a Note
+
+```bash
+curl -X POST "http://127.0.0.1:8000/notes" \
+-H "Content-Type: application/json"
