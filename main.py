@@ -12,6 +12,25 @@ def read_notes():
 class NoteCreate(BaseModel):
     title: str
     content: str
+
+class NoteUpdate(BaseModel):
+    title: str | None = None
+    content: str | None = None
+
+
+@app.patch("/notes/{note_id}")
+def update_note(note_id: int, note_update: NoteUpdate):
+    update_data = note_update.model_dump(exclude_unset=True)
+    for note in notes:
+        if note["id"] == note_id:
+            for field, value in update_data.items():
+                note[field] = value
+            return note
+    raise HTTPException(status_code=404, detail="Note not found")
+
+
+
+
 @app.post("/notes")
 def create_note(data: NoteCreate):
     global next_note_id
