@@ -28,7 +28,13 @@ def update_note(note_id: int, note_update: NoteUpdate):
             return note
     raise HTTPException(status_code=404, detail="Note not found")
 
-
+@app.delete("/notes/{note_id}")
+def delete_note(note_id: int):
+    for note in notes:
+        if note["id"] == note_id:
+            notes.remove(note)
+            return note
+    raise HTTPException(status_code=404, detail="Note not found")
 
 
 @app.post("/notes")
